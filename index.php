@@ -2,21 +2,17 @@
 
 
 require 'function.php';
+require 'Database.php';
 
 // require 'router.php';
 
-//connect mysql db
-$dsn = "mysql:host=localhost;port=3306;dbname=myapp;user=root;charset=utf8mb4";
+$db = new Database();
 
-$pdo = new PDO($dsn);
+$posts = $db->query("select * from posts;")->fetchAll(PDO::FETCH_ASSOC);
 
-$statement = $pdo->prepare("select * from posts");
-
-$statement->execute();
-
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+dd($posts);
 
 
-foreach ($posts as $post) {
-    echo "<li>" . $post['title'] . "</li>";
-}
+// foreach ($posts as $post) {
+//     echo "<li>" . $post['title'] . "</li>";
+// }
